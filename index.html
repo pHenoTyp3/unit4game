@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="javascript" href="javascript/game.js">
+</head>
+
+
+<body>
+    <div class="container">
+        <div id="target">
+
+        </div>
+        <div id="score"></div>
+        <h1 id="targetnumbers"></h1>
+        <div id="triangles">
+            <!-- <img class="tri-image" src="D:\Back up main\test\triangle.jpg" alt="">
+        <img class="tri-image" src="D:\Back up main\test\triangle.jpg" alt="">
+        <img class="tri-image" src="D:\Back up main\test\triangle.jpg" alt="">
+        <img class="tri-image" src="D:\Back up main\test\triangle.jpg" alt=""> -->
+        </div>
+        <button id="reset">Clear</button>
+        <!-- <button id="start">Start Game</button> -->
+    </div>
+
+</body>
+
+<script>
+
+
+// startgame() //not working, what did i do wrong?
+  var playerscore = 0;
+  var targetOptions = Math.floor(Math.random() * 101) + 19
+  // var targetNum = targetOptions[Math.floor(Math.random() * targetOptions.length)]
+  console.log(targetOptions)
+
+  
+  $("#targetnumbers").text("Number to guess: " + targetOptions)
+  var numOptions = [10, 11, 5, 8, 1]
+  console.log(numOptions)
+  for (var i = 0; i < numOptions.length; i++) {
+      var valueoptions = numOptions[Math.floor(Math.random() * numOptions.length)]
+      var crystalimage = $("<button>")
+      crystalimage.addClass("tri-image")
+      crystalimage.addClass("btn-image")
+      crystalimage.attr("src",
+          "https://vignette.wikia.nocookie.net/marvel-contestofchampions/images/1/1c/2-Star_Crystal.png/revision/latest?cb=20150825213642"
+      )
+      crystalimage.attr("data-idunno", valueoptions)
+      $("#triangles").append(crystalimage)
+  }
+  $("#reset").on("click", function () {
+      reset()
+      // startgame()
+      //not working, what did i do wrong?
+  })
+  // function startgame(){
+  //     var targetOptions = [100, 44, 77, 78, 164]
+  // var targetNum = targetOptions[Math.floor(Math.random() * targetOptions.length)]
+  // console.log(targetNum)
+  // $("#targetnumbers").text("Number to guess: " + targetNum)
+  // }
+  $(".tri-image").on("click", function () {
+      var crystalValue = ($(this).attr("data-idunno"));
+      crystalValue = parseInt(crystalValue);
+      playerscore += crystalValue
+      $("#score").text(playerscore)
+      console.log(crystalValue)
+      console.log(playerscore)
+      if (playerscore === targetOptions) {
+          alert("Win")
+      } else if (playerscore >= targetOptions) {
+          alert("Lost")
+          reset()
+      }
+  })
+
+  function reset() {
+      playerscore = 0
+
+
+      // var targetNum = targetOptions[Math.floor(Math.random() * targetOptions.length)]
+      // var targetOptions = Math.floor(Math.random()*101) + 19
+      $("#score").text(playerscore)
+      var targetOptions = Math.floor(Math.random() * 101) + 19
+      $("#targetnumbers").text("Number to guess: " + targetOptions)
+
+
+  }
+  
+</script>
+
+</html>
